@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volosh Sport Footwear — Move Better. Perform Better.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#EEF2FF',
+                            100: '#E0E7FF',
+                            200: '#C7D2FE',
+                            300: '#A5B4FC',
+                            400: '#818CF8',
+                            500: '#1B3A5C',
+                            600: '#152E4A',
+                            700: '#0F2238',
+                            800: '#0A1628',
+                            900: '#050B14',
+                        },
+                        gold: {
+                            300: '#E2C992',
+                            400: '#D4B87A',
+                            500: '#C8A96E',
+                            600: '#B8944F',
+                            700: '#9A7A3E',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: #F5F6FA; color: #1A1A2E; overflow-x: hidden; }
+
+        .bg-pattern {
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(27,58,92,0.04) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(200,169,110,0.06) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(27,58,92,0.03) 0%, transparent 50%);
+        }
+
+        .bg-grid {
+            background-image:
+                linear-gradient(rgba(27,58,92,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(27,58,92,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .bg-dots {
+            background-image: radial-gradient(rgba(27,58,92,0.06) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+        @keyframes floatReverse {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(10px) rotate(-2deg); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes pulse-gold {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(200,169,110,0.3); }
+            50% { box-shadow: 0 0 0 12px rgba(200,169,110,0); }
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-float-reverse { animation: floatReverse 5s ease-in-out infinite; }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+        .animate-slide-in-right { animation: slideInRight 0.8s ease-out forwards; }
+        .animate-scale-in { animation: scaleIn 0.6s ease-out forwards; }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(27,58,92,0.12);
+        }
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+        .product-img {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1B3A5C, #2A5280);
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-primary:hover::before { left: 100%; }
+        .btn-primary:hover {
+            box-shadow: 0 8px 30px rgba(27,58,92,0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #C8A96E, #B8944F);
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-gold:hover::before { left: 100%; }
+        .btn-gold:hover {
+            box-shadow: 0 8px 30px rgba(200,169,110,0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid #1B3A5C;
+            color: #1B3A5C;
+            transition: all 0.3s ease;
+        }
+        .btn-outline:hover {
+            background: #1B3A5C;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast {
+            animation: slideInRight 0.4s ease-out, fadeOut 0.4s ease-in 2.6s forwards;
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; transform: translateX(40px); }
+        }
+
+        .navbar-scrolled {
+            background: rgba(255,255,255,0.95) !important;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 30px rgba(27,58,92,0.08);
+        }
+
+        .badge-preorder {
+            background: linear-gradient(135deg, #C8A96E, #E2C992);
+            color: #1A1A2E;
+            animation: pulse-gold 2s ease-in-out infinite;
+        }
+
+        .marquee-track {
+            animation: marquee 30s linear infinite;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F5F6FA; }
+        ::-webkit-scrollbar-thumb { background: #C8A96E; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #B8944F; }
+
+        .cart-overlay {
+            background: rgba(27,58,92,0.4);
+            backdrop-filter: blur(4px);
+            transition: opacity 0.3s ease;
+        }
+        .cart-sidebar {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(27,58,92,0.1), rgba(200,169,110,0.2), rgba(27,58,92,0.1), transparent);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #F5F6FA 0%, #EEF2FF 30%, #E0E7FF 60%, #F5F6FA 100%);
+        }
+
+        .feature-icon {
+            background: linear-gradient(135deg, rgba(27,58,92,0.08), rgba(200,169,110,0.08));
+            border: 1px solid rgba(27,58,92,0.06);
+        }
+
+        .market-card {
+            transition: all 0.3s ease;
+        }
+        .market-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(27,58,92,0.1);
+        }
+
+        .modal-overlay {
+            background: rgba(27,58,92,0.5);
+            backdrop-filter: blur(6px);
+        }
+
+        .size-btn {
+            transition: all 0.2s ease;
+        }
+        .size-btn:hover, .size-btn.active {
+            background: #1B3A5C;
+            color: white;
+            border-color: #1B3A5C;
+        }
+    </style>
+</head>
+<body class="bg-pattern">
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-20 right-4 z-[100] flex flex-col gap-3"></div>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style="background: transparent;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 lg:h-20">
+                <a href="#hero" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center">
+                        <span class="text-white font-display font-bold text-xl">V</span>
+                    </div>
+                    <div>
+                        <span class="font-display font-bold text-lg text-brand-500 tracking-tight">VOLOSH</span>
+                        <span class="hidden sm:block text-[10px] text-gray-400 uppercase tracking-widest -mt-1">Sport Footwear</span>
+                    </div>
+                </a>
+
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="#about" class="text-sm text-gray-600 hover:text-brand-500 transition-colors font-medium">About</a>
+                    <a href="#products" class="text-sm text-gray-600 hover:text-brand-500 transition-colors font-medium">Products</a>
+                    <a href="#features" class="text-sm text-gray-600 hover:text-brand-500 transition-colors font-medium">Advantages</a>
+                    <a href="#global" class="text-sm text-gray-600 hover:text-brand-500 transition-colors font-medium">Global</a>
+                    <a href="#shipping" class="text-sm text-gray-600 hover:text-brand-500 transition-colors font-medium">Shipping</a>
+                    <a href="#contact" class="text-sm text-gray-600 hover:text-brand-500 transition-colors font-medium">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleCart()" class="relative p-2 rounded-full hover:bg-brand-50 transition-colors">
+                        <i data-lucide="shopping-bag" class="w-5 h-5 text-brand-500"></i>
+                        <span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 bg-gold-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center hidden">0</span>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-full hover:bg-brand-50 transition-colors">
+                        <i data-lucide="menu" class="w-5 h-5 text-brand-500" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="lg:hidden hidden bg-white border-t border-gray-100 shadow-lg">
+            <div class="px-4 py-4 space-y-1">
+                <a href="#about" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-lg text-gray-600 hover:bg-brand-50 hover:text-brand-500 transition-colors font-medium">About</a>
+                <a href="#products" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-lg text-gray-600 hover:bg-brand-50 hover:text-brand-500 transition-colors font-medium">Products</a>
+                <a href="#features" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-lg text-gray-600 hover:bg-brand-50 hover:text-brand-500 transition-colors font-medium">Advantages</a>
+                <a href="#global" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-lg text-gray-600 hover:bg-brand-50 hover:text-brand-500 transition-colors font-medium">Global</a>
+                <a href="#shipping" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-lg text-gray-600 hover:bg-brand-50 hover:text-brand-500 transition-colors font-medium">Shipping</a>
+                <a href="#contact" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-lg text-gray-600 hover:bg-brand-50 hover:text-brand-500 transition-colors font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-overlay" class="fixed inset-0 z-[90] cart-overlay hidden" onclick="toggleCart()"></div>
+    <div id="cart-sidebar" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-white z-[95] cart-sidebar transform translate-x-full shadow-2xl flex flex-col">
+        <div class="flex items-center justify-between p-6 border-b border-gray-100">
+            <h3 class="font-display font-bold text-lg text-brand-500">Shopping Cart</h3>
+            <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                <i data-lucide="x" class="w-5 h-5 text-gray-500"></i>
+            </button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6">
+            <div id="cart-empty" class="flex flex-col items-center justify-center h-full text-center">
+                <div class="w-20 h-20 rounded-full bg-brand-50 flex items-center justify-center mb-4">
+                    <i data-lucide="shopping-bag" class="w-8 h-8 text-brand-200"></i>
+                </div>
+                <p class="text-gray-400 font-medium">Your cart is empty</p>
+                <p class="text-gray-300 text-sm mt-1">Start adding products</p>
+            </div>
+            <div id="cart-list" class="space-y-4 hidden"></div>
+        </div>
+        <div id="cart-footer" class="border-t border-gray-100 p-6 hidden">
+            <div class="flex justify-between mb-2">
+                <span class="text-gray-500">Subtotal</span>
+                <span id="cart-subtotal" class="font-semibold text-brand-500">$0</span>
+            </div>
+            <div class="flex justify-between mb-4">
+                <span class="text-gray-500">Estimated Shipping</span>
+                <span class="text-sm text-gray-400">Calculated at checkout</span>
+            </div>
+            <button onclick="checkout()" class="w-full btn-primary py-3 rounded-xl font-semibold text-sm">
+                Checkout Pre-Order
+            </button>
+            <p class="text-center text-xs text-gray-400 mt-3">* All products are made by pre-order</p>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div id="product-modal" class="fixed inset-0 z-[80] modal-overlay hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto animate-scale-in" onclick="event.stopPropagation()">
+            <div class="grid md:grid-cols-2 gap-0">
+                <div class="bg-gradient-to-br from-brand-50 to-gray-50 p-6 md:p-8 flex items-center justify-center rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                    <img id="modal-img" src="" alt="" class="w-full max-w-sm product-img rounded-lg">
+                </div>
+                <div class="p-6 md:p-8 flex flex-col">
+                    <button onclick="closeProductModal()" class="self-end p-1 hover:bg-gray-100 rounded-full transition-colors mb-2">
+                        <i data-lucide="x" class="w-5 h-5 text-gray-400"></i>
+                    </button>
+                    <span class="badge-preorder text-xs font-bold px-3 py-1 rounded-full self-start mb-3">PRE-ORDER</span>
+                    <h2 id="modal-name" class="font-display font-bold text-2xl text-brand-500 mb-2"></h2>
+                    <p id="modal-desc" class="text-gray-500 text-sm leading-relaxed mb-4"></p>
+                    <div class="mb-4">
+                        <span class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Material</span>
+                        <p id="modal-material" class="text-sm text-gray-600 mt-1"></p>
+                    </div>
+                    <div class="mb-4">
+                        <span class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-2 block">Size</span>
+                        <div class="flex flex-wrap gap-2" id="modal-sizes"></div>
+                    </div>
+                    <div class="mt-auto">
+                        <div class="flex items-baseline gap-2 mb-4">
+                            <span id="modal-price" class="font-display font-bold text-3xl text-gold-600"></span>
+                            <span class="text-xs text-gray-400">/ pair</span>
+                        </div>
+                        <button id="modal-add-btn" class="w-full btn-gold py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2">
+                            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero-gradient min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute top-20 left-10 w-32 h-32 bg-brand-500/5 rounded-xl rotate-12 animate-float"></div>
+        <div class="absolute top-40 right-20 w-24 h-24 bg-gold-500/10 rounded-lg -rotate-12 animate-float-reverse"></div>
+        <div class="absolute bottom-32 left-1/4 w-16 h-16 bg-brand-500/5 rounded-full animate-float delay-300"></div>
+        <div class="absolute top-1/3 right-1/3 w-20 h-20 border-2 border-brand-500/10 rounded-xl rotate-45 animate-float-reverse delay-200"></div>
+        <div class="absolute bottom-20 right-10 w-28 h-28 bg-gold-500/5 rounded-2xl rotate-6 animate-float delay-400"></div>
+        <div class="absolute top-1/2 left-5 w-12 h-12 border-2 border-gold-500/15 rounded-lg rotate-12 animate-float delay-500"></div>
+
+        <div class="absolute inset-0 bg-grid opacity-50"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="animate-fade-in-up">
+                    <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-brand-100">
+                        <span class="w-2 h-2 bg-gold-500 rounded-full"></span>
+                        <span class="text-xs font-semibold text-brand-500 uppercase tracking-wider">Made in Indonesia</span>
+                    </div>
+
+                    <h1 class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-brand-500 leading-[0.95] tracking-tight mb-6">
+                        Move Better.<br>
+                        <span class="bg-gradient-to-r from-gold-500 to-gold-700 bg-clip-text text-transparent">Perform</span> Better.
+                    </h1>
+
+                    <p class="text-gray-500 text-lg lg:text-xl leading-relaxed mb-8 max-w-lg">
+                        Premium Leather Sports Footwear from Indonesia. Genuine leather of the highest quality for an active lifestyle and top performance.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 mb-10">
+                        <a href="#products" class="btn-primary px-8 py-4 rounded-xl font-semibold text-sm flex items-center gap-2">
+                            View Collection
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#about" class="btn-outline px-8 py-4 rounded-xl font-semibold text-sm">
+                            About Us
+                        </a>
+                    </div>
+
+                    <div class="flex items-center gap-8">
+                        <div>
+                            <div class="font-display font-bold text-2xl text-brand-500">#1</div>
+                            <div class="text-xs text-gray-400">World Exporter<br>HS Code 640319</div>
+                        </div>
+                        <div class="w-px h-10 bg-gray-200"></div>
+                        <div>
+                            <div class="font-display font-bold text-2xl text-brand-500">39.8%</div>
+                            <div class="text-xs text-gray-400">Global Export<br>Share</div>
+                        </div>
+                        <div class="w-px h-10 bg-gray-200"></div>
+                        <div>
+                            <div class="font-display font-bold text-2xl text-brand-500">$1.35B</div>
+                            <div class="text-xs text-gray-400">Export Value<br>2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative animate-fade-in-up delay-300" style="opacity:0;">
+                    <div class="absolute inset-0 bg-gradient-to-br from-brand-200/30 to-gold-300/20 rounded-3xl transform rotate-3"></div>
+                    <div class="relative bg-white rounded-3xl p-6 lg:p-8 shadow-xl shadow-brand-500/5 border border-gray-100">
+                        <div class="bg-gradient-to-br from-brand-50 to-gray-50 rounded-2xl p-4 flex items-center justify-center aspect-square">
+                            <img src="https://z-cdn-media.chatglm.cn/files/ace1e2d3-9d16-4fb2-80d6-746824327c07.png?auth_key=1880753528-fce9eb0f66094136bd393bbf88848abc-0-4984ebf8f00eed2087f57af81389d9af" alt="Volosh Shaga" class="w-full max-w-xs product-img">
+                        </div>
+                        <div class="mt-4 flex items-center justify-between">
+                            <div>
+                                <h3 class="font-display font-bold text-brand-500">Volosh Shaga</h3>
+                                <p class="text-sm text-gray-400">Hero Collection</p>
+                            </div>
+                            <span class="font-display font-bold text-gold-600 text-xl">$98</span>
+                        </div>
+                    </div>
+                    <div class="absolute -top-3 -right-3 bg-white rounded-xl px-4 py-2 shadow-lg border border-gray-100 animate-float">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="star" class="w-4 h-4 text-gold-500 fill-gold-500"></i>
+                            <span class="text-sm font-semibold text-brand-500">Premium Leather</span>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-3 -left-3 bg-white rounded-xl px-4 py-2 shadow-lg border border-gray-100 animate-float-reverse">
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg">🇮🇩</span>
+                            <span class="text-sm font-semibold text-brand-500">Made in Indonesia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#F5F6FA] to-transparent"></div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="bg-brand-500 py-3 overflow-hidden">
+        <div class="marquee-track flex items-center gap-8 whitespace-nowrap">
+            <span class="text-white/60 text-xs uppercase tracking-widest font-medium flex items-center gap-3">✦ Genuine Leather</span>
+            <span class="text-white/60 text-xs uppercase tracking-widest font-medium flex items-center gap-3">✦ Handcrafted</span>
+            <span class="text-white/60 text-xs uppercase tracking-widest font-medium flex items-center gap-3">✦ Export Ready</span>
+            <span class="text-white/60 text-xs uppercase tracking-widest font-medium flex items-center gap-3">✦ Made in Indonesia</span>
+            <span class="text-white/60 text-xs uppercase tracking-widest font-medium flex items-center gap-3">✦ Premium Quality</span>
+            <span class="text-white/60 text-xs uppercase tracking-widest font-medium flex items-center gap-3">✦ Competitive Pricing</span>
+            <span class="text-white/60 text-xs uppercase tracking-widest font-medium flex items-center gap-3">✦ Genuine Leather</span>
+            <span class="text-white/60 text-xs uppercase tracking-widest font-medium flex items-center gap-3">✦ Handcrafted</span>
+            <span class="text-white/60 text-xs uppercase tracking-widest font-medium flex items-center gap-3">✦ Export Ready</span>
+            <span class="text-white/60 text-xs uppercase tracking-widest font-medium flex items-center gap-3">✦ Made in Indonesia</span>
+            <span class="text-white/60 text-xs uppercase tracking-widest font-medium flex items-center gap-3">✦ Premium Quality</span>
+            <span class="text-white/60 text-xs uppercase tracking-widest font-medium flex items-center gap-3">✦ Competitive Pricing</span>
+        </div>
+    </div>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-20 lg:py-28 bg-dots relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <span class="text-xs text-gold-600 uppercase tracking-widest font-semibold mb-4 block">About Us</span>
+                    <h2 class="font-display font-bold text-3xl lg:text-4xl text-brand-500 tracking-tight mb-6">
+                        Volosh Sport Footwear
+                    </h2>
+                    <p class="text-gray-500 leading-relaxed mb-4">
+                        Volosh Sport Footwear is a premium Indonesian footwear brand specializing in genuine leather sports shoes. Designed to deliver comfort, durability, and modern style, our products support both active lifestyles and everyday wear.
+                    </p>
+                    <p class="text-gray-500 leading-relaxed mb-8">
+                        By combining quality materials with skilled craftsmanship, Volosh creates footwear that meets the needs of consumers in domestic and international markets.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+                            <span class="text-2xl mb-2 block">🇮🇩</span>
+                            <span class="text-sm font-semibold text-brand-500 block">Made in Indonesia</span>
+                            <span class="text-xs text-gray-400">World's #1 Exporter</span>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+                            <span class="text-2xl mb-2 block">⭐</span>
+                            <span class="text-sm font-semibold text-brand-500 block">Premium Leather</span>
+                            <span class="text-xs text-gray-400">Export Quality</span>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+                            <span class="text-2xl mb-2 block">🏃</span>
+                            <span class="text-sm font-semibold text-brand-500 block">Performance</span>
+                            <span class="text-xs text-gray-400">Sports Footwear</span>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+                            <span class="text-2xl mb-2 block">✨</span>
+                            <span class="text-sm font-semibold text-brand-500 block">Lifestyle</span>
+                            <span class="text-xs text-gray-400">Fashion & Casual</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal delay-200 relative">
+                    <div class="absolute -top-4 -left-4 w-full h-full bg-gradient-to-br from-brand-100 to-gold-100 rounded-2xl"></div>
+                    <div class="relative bg-white rounded-2xl p-8 border border-gray-100 shadow-lg">
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-lg feature-icon flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="tag" class="w-5 h-5 text-brand-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-brand-500 mb-1">Product Information</h4>
+                                    <div class="text-sm text-gray-500 space-y-1">
+                                        <p><span class="text-gray-400">Brand:</span> Volosh Sport Footwear</p>
+                                        <p><span class="text-gray-400">HS Code:</span> 640319</p>
+                                        <p><span class="text-gray-400">Category:</span> Leather Sports Footwear</p>
+                                        <p><span class="text-gray-400">Material:</span> 100% Genuine Leather</p>
+                                        <p><span class="text-gray-400">Origin:</span> Indonesia</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="section-divider"></div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-lg feature-icon flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="layers" class="w-5 h-5 text-brand-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-brand-500 mb-1">Product Usage</h4>
+                                    <div class="flex flex-wrap gap-2 mt-2">
+                                        <span class="text-xs bg-brand-50 text-brand-500 px-3 py-1 rounded-full font-medium">Sports</span>
+                                        <span class="text-xs bg-brand-50 text-brand-500 px-3 py-1 rounded-full font-medium">Daily Wear</span>
+                                        <span class="text-xs bg-brand-50 text-brand-500 px-3 py-1 rounded-full font-medium">Fashion</span>
+                                        <span class="text-xs bg-brand-50 text-brand-500 px-3 py-1 rounded-full font-medium">Casual</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="section-divider"></div>
+                            <div class="bg-gradient-to-r from-gold-50 to-gold-100/50 rounded-xl p-4 border border-gold-200/30">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <i data-lucide="clock" class="w-4 h-4 text-gold-600"></i>
+                                    <span class="text-sm font-semibold text-gold-700">Pre-Order System</span>
+                                </div>
+                                <p class="text-xs text-gold-600/80">All products are made by pre-order to guarantee the quality and freshness of every pair of shoes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- PRODUCTS SECTION -->
+    <section id="products" class="py-20 lg:py-28 relative overflow-hidden">
+        <div class="absolute top-10 right-0 w-64 h-64 bg-brand-500/3 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-10 left-0 w-48 h-48 bg-gold-500/5 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="text-xs text-gold-600 uppercase tracking-widest font-semibold mb-4 block">Featured Collection</span>
+                <h2 class="font-display font-bold text-3xl lg:text-5xl text-brand-500 tracking-tight mb-4">
+                    Export Collection
+                </h2>
+                <p class="text-gray-400 max-w-xl mx-auto">Our premium collection ready to break into global markets. Every product is crafted with the finest materials and exceptional precision.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" id="product-grid"></div>
+
+            <div class="text-center mt-12 reveal">
+                <a href="#contact" class="btn-outline px-8 py-4 rounded-xl font-semibold text-sm inline-flex items-center gap-2">
+                    Explore Full Collection
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- FEATURES SECTION -->
+    <section id="features" class="py-20 lg:py-28 bg-dots relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-xs text-gold-600 uppercase tracking-widest font-semibold mb-4 block">Advantages</span>
+                <h2 class="font-display font-bold text-3xl lg:text-5xl text-brand-500 tracking-tight mb-4">
+                    Why Choose Volosh?
+                </h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl feature-icon flex items-center justify-center mb-4">
+                        <i data-lucide="gem" class="w-6 h-6 text-brand-500"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-brand-500 mb-2">100% Genuine Leather</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Premium genuine leather materials that guarantee extraordinary comfort and durability.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl feature-icon flex items-center justify-center mb-4">
+                        <i data-lucide="hand-metal" class="w-6 h-6 text-brand-500"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-brand-500 mb-2">Handcrafted</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Handcrafted by experienced and talented Indonesian artisans.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl feature-icon flex items-center justify-center mb-4">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-brand-500"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-brand-500 mb-2">Durable & Long Lasting</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Sturdy construction designed to withstand long-term use.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl feature-icon flex items-center justify-center mb-4">
+                        <i data-lucide="footprints" class="w-6 h-6 text-brand-500"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-brand-500 mb-2">Flexible Sole Technology</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Flexible sole technology providing comfort for daily activities and sports.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl feature-icon flex items-center justify-center mb-4">
+                        <i data-lucide="sparkles" class="w-6 h-6 text-brand-500"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-brand-500 mb-2">Premium Finishing</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Premium finishing with attention to detail on every stitch and surface.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl feature-icon flex items-center justify-center mb-4">
+                        <i data-lucide="palette" class="w-6 h-6 text-brand-500"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-brand-500 mb-2">Modern & Stylish Design</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Modern and stylish design suitable for various occasions and styles.</p>
+                </div>
+            </div>
+
+            <!-- Customization -->
+            <div class="mt-16 reveal">
+                <div class="bg-gradient-to-r from-brand-500 to-brand-600 rounded-2xl p-8 lg:p-12 text-white relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                    <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+                    <div class="relative z-10 grid lg:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <span class="text-gold-300 text-xs uppercase tracking-widest font-semibold mb-3 block">Customization Services</span>
+                            <h3 class="font-display font-bold text-2xl lg:text-3xl mb-4">Customize Shoes to Your Needs</h3>
+                            <p class="text-white/70 text-sm leading-relaxed">We provide customization services to meet your specific needs, from colors, logos, designs, to special specifications.</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white/10 rounded-xl p-4 backdrop-blur-sm border border-white/10">
+                                <i data-lucide="paintbrush" class="w-6 h-6 text-gold-300 mb-2"></i>
+                                <span class="text-sm font-semibold block">Custom Colors</span>
+                                <span class="text-xs text-white/60">Colors on request</span>
+                            </div>
+                            <div class="bg-white/10 rounded-xl p-4 backdrop-blur-sm border border-white/10">
+                                <i data-lucide="stamp" class="w-6 h-6 text-gold-300 mb-2"></i>
+                                <span class="text-sm font-semibold block">Custom Logo</span>
+                                <span class="text-xs text-white/60">Your brand logo</span>
+                            </div>
+                            <div class="bg-white/10 rounded-xl p-4 backdrop-blur-sm border border-white/10">
+                                <i data-lucide="pen-tool" class="w-6 h-6 text-gold-300 mb-2"></i>
+                                <span class="text-sm font-semibold block">Custom Design</span>
+                                <span class="text-xs text-white/60">Exclusive design</span>
+                            </div>
+                            <div class="bg-white/10 rounded-xl p-4 backdrop-blur-sm border border-white/10">
+                                <i data-lucide="settings" class="w-6 h-6 text-gold-300 mb-2"></i>
+                                <span class="text-sm font-semibold block">Custom Specs</span>
+                                <span class="text-xs text-white/60">Special specifications</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- GLOBAL MARKET SECTION -->
+    <section id="global" class="py-20 lg:py-28 relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-500/3 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="text-xs text-gold-600 uppercase tracking-widest font-semibold mb-4 block">Global Reach</span>
+                <h2 class="font-display font-bold text-3xl lg:text-5xl text-brand-500 tracking-tight mb-4">
+                    Reaching Global Markets
+                </h2>
+                <p class="text-gray-400 max-w-xl mx-auto">Volosh has reached markets in various countries and is ready for broader international expansion.</p>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-6 mb-16 reveal">
+                <div class="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-sm">
+                    <div class="font-display font-bold text-3xl lg:text-4xl text-brand-500 mb-1">#1</div>
+                    <div class="text-sm text-gray-400">World Exporter<br>HS Code 640319</div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-sm">
+                    <div class="font-display font-bold text-3xl lg:text-4xl text-gold-600 mb-1">39.8%</div>
+                    <div class="text-sm text-gray-400">Share of<br>Global Exports</div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-sm">
+                    <div class="font-display font-bold text-3xl lg:text-4xl text-brand-500 mb-1">$1.35B</div>
+                    <div class="text-sm text-gray-400">Export Value<br>2025</div>
+                </div>
+            </div>
+
+            <!-- Market Cards -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12 reveal">
+                <div class="market-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm text-center">
+                    <span class="text-3xl mb-2 block">🇺🇸</span>
+                    <h4 class="font-semibold text-brand-500 text-sm">United States</h4>
+                    <p class="text-xs text-gray-400 mt-1">40.3% of Indonesia's exports</p>
+                </div>
+                <div class="market-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm text-center">
+                    <span class="text-3xl mb-2 block">🇳🇱</span>
+                    <h4 class="font-semibold text-brand-500 text-sm">Netherlands</h4>
+                    <p class="text-xs text-gray-400 mt-1">European logistics hub</p>
+                </div>
+                <div class="market-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm text-center">
+                    <span class="text-3xl mb-2 block">🇨🇳</span>
+                    <h4 class="font-semibold text-brand-500 text-sm">China</h4>
+                    <p class="text-xs text-gray-400 mt-1">Large consumer market</p>
+                </div>
+                <div class="market-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm text-center">
+                    <span class="text-3xl mb-2 block">🇧🇪</span>
+                    <h4 class="font-semibold text-brand-500 text-sm">Belgium</h4>
+                    <p class="text-xs text-gray-400 mt-1">EU trade gateway</p>
+                </div>
+                <div class="market-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm text-center">
+                    <span class="text-3xl mb-2 block">🇯🇵</span>
+                    <h4 class="font-semibold text-brand-500 text-sm">Japan</h4>
+                    <p class="text-xs text-gray-400 mt-1">High quality focus</p>
+                </div>
+            </div>
+
+            <!-- Regional Coverage -->
+            <div class="reveal">
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+                    <h3 class="font-display font-semibold text-brand-500 text-lg mb-6 text-center">Regional Coverage</h3>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <span class="px-4 py-2 bg-brand-50 text-brand-500 rounded-full text-sm font-medium">🌎 North America</span>
+                        <span class="px-4 py-2 bg-brand-50 text-brand-500 rounded-full text-sm font-medium">🌍 Europe</span>
+                        <span class="px-4 py-2 bg-brand-50 text-brand-500 rounded-full text-sm font-medium">🌏 Asia</span>
+                        <span class="px-4 py-2 bg-brand-50 text-brand-500 rounded-full text-sm font-medium">🌍 Middle East</span>
+                        <span class="px-4 py-2 bg-brand-50 text-brand-500 rounded-full text-sm font-medium">🌎 South America</span>
+                        <span class="px-4 py-2 bg-brand-50 text-brand-500 rounded-full text-sm font-medium">🌍 Africa</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- EXPORT READINESS -->
+    <section class="py-20 lg:py-28 bg-dots relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <span class="text-xs text-gold-600 uppercase tracking-widest font-semibold mb-4 block">Export Ready</span>
+                    <h2 class="font-display font-bold text-3xl lg:text-4xl text-brand-500 tracking-tight mb-6">
+                        Ready to Enter Global Markets
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-3 h-3 text-green-600"></i>
+                            </div>
+                            <span class="text-gray-600">Premium Genuine Leather Materials</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-3 h-3 text-green-600"></i>
+                            </div>
+                            <span class="text-gray-600">Strong Indonesian Manufacturing Capability</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-3 h-3 text-green-600"></i>
+                            </div>
+                            <span class="text-gray-600">Growing Global Demand</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-3 h-3 text-green-600"></i>
+                            </div>
+                            <span class="text-gray-600">Competitive Pricing</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-3 h-3 text-green-600"></i>
+                            </div>
+                            <span class="text-gray-600">Customization Services</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-3 h-3 text-green-600"></i>
+                            </div>
+                            <span class="text-gray-600">Suitable for Retail & Distribution</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-3 h-3 text-green-600"></i>
+                            </div>
+                            <span class="text-gray-600">International Market Potential</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ★ INI BAGIAN YANG DIUBAH - 4 kartu grid 2x2 ★ -->
+                <div class="reveal delay-200">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gradient-to-br from-brand-500 to-brand-600 rounded-2xl p-6 text-white">
+                            <i data-lucide="globe" class="w-8 h-8 text-gold-300 mb-3"></i>
+                            <h4 class="font-display font-bold text-lg mb-1">#1 Exporter</h4>
+                            <p class="text-white/60 text-sm">Indonesia is the largest exporter for HS Code 640319</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                            <i data-lucide="award" class="w-8 h-8 text-gold-500 mb-3"></i>
+                            <h4 class="font-display font-bold text-lg text-brand-500 mb-1">Premium Quality</h4>
+                            <p class="text-gray-400 text-sm">Products that meet international standards</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                            <i data-lucide="network" class="w-8 h-8 text-gold-500 mb-3"></i>
+                            <h4 class="font-display font-bold text-lg text-brand-500 mb-1">Global Access</h4>
+                            <p class="text-gray-400 text-sm">Access to markets in 6 global regions</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-gold-500 to-gold-600 rounded-2xl p-6 text-white">
+                            <i data-lucide="rocket" class="w-8 h-8 text-white/80 mb-3"></i>
+                            <h4 class="font-display font-bold text-lg mb-1">Ready to Expand</h4>
+                            <p class="text-white/70 text-sm">Ready for international expansion</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- ★ AKHIR BAGIAN YANG DIUBAH ★ -->
+
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- SHIPPING SECTION -->
+    <section id="shipping" class="py-20 lg:py-28 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-xs text-gold-600 uppercase tracking-widest font-semibold mb-4 block">Shipping</span>
+                <h2 class="font-display font-bold text-3xl lg:text-5xl text-brand-500 tracking-tight mb-4">
+                    Shipping Information
+                </h2>
+                <p class="text-gray-400 max-w-xl mx-auto">Shipping from Jakarta, Indonesia worldwide with reliable methods.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Delivery Times -->
+                <div class="bg-white rounded-2xl p-6 lg:p-8 border border-gray-100 shadow-sm reveal">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-lg feature-icon flex items-center justify-center">
+                            <i data-lucide="clock" class="w-5 h-5 text-brand-500"></i>
+                        </div>
+                        <h3 class="font-display font-semibold text-brand-500">Estimated Delivery</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-50">
+                            <span class="text-sm text-gray-600">🌏 Asia</span>
+                            <span class="text-sm font-semibold text-brand-500">7–14 Days</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-50">
+                            <span class="text-sm text-gray-600">🌍 Middle East</span>
+                            <span class="text-sm font-semibold text-brand-500">10–18 Days</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-50">
+                            <span class="text-sm text-gray-600">🌎 North America</span>
+                            <span class="text-sm font-semibold text-brand-500">10–20 Days</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-50">
+                            <span class="text-sm text-gray-600">🌍 Europe</span>
+                            <span class="text-sm font-semibold text-brand-500">10–20 Days</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-50">
+                            <span class="text-sm text-gray-600">🌎 South America</span>
+                            <span class="text-sm font-semibold text-brand-500">15–25 Days</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2">
+                            <span class="text-sm text-gray-600">🌍 Africa</span>
+                            <span class="text-sm font-semibold text-brand-500">15–25 Days</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping Methods -->
+                <div class="bg-white rounded-2xl p-6 lg:p-8 border border-gray-100 shadow-sm reveal delay-200">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-lg feature-icon flex items-center justify-center">
+                            <i data-lucide="plane" class="w-5 h-5 text-brand-500"></i>
+                        </div>
+                        <h3 class="font-display font-semibold text-brand-500">Shipping Methods</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-brand-50 rounded-xl p-4">
+                            <div class="flex items-center gap-3 mb-2">
+                                <i data-lucide="plane" class="w-5 h-5 text-brand-500"></i>
+                                <span class="font-semibold text-brand-500 text-sm">Air Freight</span>
+                            </div>
+                            <p class="text-xs text-gray-500">Air delivery for maximum speed</p>
+                        </div>
+                        <div class="bg-brand-50 rounded-xl p-4">
+                            <div class="flex items-center gap-3 mb-2">
+                                <i data-lucide="package" class="w-5 h-5 text-brand-500"></i>
+                                <span class="font-semibold text-brand-500 text-sm">International Courier</span>
+                            </div>
+                            <p class="text-xs text-gray-500">Trusted international courier service</p>
+                        </div>
+                        <div class="bg-brand-50 rounded-xl p-4">
+                            <div class="flex items-center gap-3 mb-2">
+                                <i data-lucide="truck" class="w-5 h-5 text-brand-500"></i>
+                                <span class="font-semibold text-brand-500 text-sm">Local Distribution Partner</span>
+                            </div>
+                            <p class="text-xs text-gray-500">Local distribution partners for efficiency</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Packaging -->
+                <div class="bg-white rounded-2xl p-6 lg:p-8 border border-gray-100 shadow-sm reveal delay-400">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-lg feature-icon flex items-center justify-center">
+                            <i data-lucide="box" class="w-5 h-5 text-brand-500"></i>
+                        </div>
+                        <h3 class="font-display font-semibold text-brand-500">Export Packaging</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-gold-500 rounded-full flex-shrink-0"></div>
+                            <span class="text-sm text-gray-600">Premium Shoe Box</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-gold-500 rounded-full flex-shrink-0"></div>
+                            <span class="text-sm text-gray-600">Protective Wrapping</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-gold-500 rounded-full flex-shrink-0"></div>
+                            <span class="text-sm text-gray-600">Reinforced Outer Carton</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-gold-500 rounded-full flex-shrink-0"></div>
+                            <span class="text-sm text-gray-600">Moisture Protection</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-gold-500 rounded-full flex-shrink-0"></div>
+                            <span class="text-sm text-gray-600">Product Label & Export ID</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 bg-gradient-to-r from-gold-50 to-gold-100/50 rounded-xl p-4 border border-gold-200/30">
+                        <p class="text-xs text-gold-700"><strong>Origin:</strong> Jakarta, Indonesia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-7xl mx-auto"></div>
+
+    <!-- CTA SECTION -->
+    <section class="py-20 lg:py-28 relative overflow-hidden">
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="absolute inset-0 bg-grid opacity-30"></div>
+
+        <div class="absolute top-10 left-10 w-24 h-24 border-2 border-brand-500/10 rounded-xl rotate-12 animate-float"></div>
+        <div class="absolute bottom-10 right-10 w-32 h-32 bg-gold-500/5 rounded-2xl -rotate-6 animate-float-reverse"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center reveal">
+            <span class="text-xs text-gold-600 uppercase tracking-widest font-semibold mb-4 block">Ready to Step Up?</span>
+            <h2 class="font-display font-bold text-3xl lg:text-5xl text-brand-500 tracking-tight mb-6">
+                Ready to Step Into<br>
+                <span class="bg-gradient-to-r from-gold-500 to-gold-700 bg-clip-text text-transparent">Global Markets</span>
+            </h2>
+            <p class="text-gray-500 text-lg max-w-2xl mx-auto mb-8">
+                Move Better. Perform Better. Premium Leather Sports Footwear from Indonesia for the world.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#contact" class="btn-gold px-10 py-4 rounded-xl font-semibold text-sm flex items-center gap-2">
+                    Contact Us
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+                <a href="#products" class="btn-outline px-10 py-4 rounded-xl font-semibold text-sm">
+                    View Products
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-20 lg:py-28 bg-brand-500 relative overflow-hidden">
+        <div class="absolute inset-0 bg-dots opacity-5"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="text-gold-300 text-xs uppercase tracking-widest font-semibold mb-4 block">Contact</span>
+                <h2 class="font-display font-bold text-3xl lg:text-5xl text-white tracking-tight mb-4">
+                    Contact Us
+                </h2>
+                <p class="text-white/50 max-w-xl mx-auto">Ready to collaborate or place an order? Don't hesitate to reach out to our team.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="reveal">
+                    <div class="space-y-6">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="map-pin" class="w-5 h-5 text-gold-300"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-semibold mb-1">Location</h4>
+                                    <p class="text-white/50 text-sm">Jakarta, Indonesia</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="phone" class="w-5 h-5 text-gold-300"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-semibold mb-1">Phone</h4>
+                                    <a href="tel:+6285727027643" class="text-white/50 text-sm hover:text-gold-300 transition-colors">+62 857 2702 7643</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="mail" class="w-5 h-5 text-gold-300"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-semibold mb-1">Email</h4>
+                                    <a href="mailto:voloshsport.id@gmail.com" class="text-white/50 text-sm hover:text-gold-300 transition-colors">voloshsport.id@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="globe" class="w-5 h-5 text-gold-300"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-semibold mb-1">Website & Instagram</h4>
+                                    <a href="https://www.voloshsport.com" target="_blank" class="text-white/50 text-sm hover:text-gold-300 transition-colors block">www.voloshsport.com</a>
+                                    <a href="https://instagram.com/voloshsport" target="_blank" class="text-white/50 text-sm hover:text-gold-300 transition-colors block">@voloshsport</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal delay-200">
+                    <form id="contact-form" class="bg-white rounded-2xl p-6 lg:p-8 shadow-xl">
+                        <h3 class="font-display font-semibold text-brand-500 text-lg mb-6">Send a Message</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-2 block">Full Name</label>
+                                <input type="text" placeholder="Your name" class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100 transition-all" required>
+                            </div>
+                            <div>
+                                <label class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-2 block">Email</label>
+                                <input type="email" placeholder="email@example.com" class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100 transition-all" required>
+                            </div>
+                            <div>
+                                <label class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-2 block">Subject</label>
+                                <select class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100 transition-all text-gray-600">
+                                    <option>Product Order</option>
+                                    <option>Customization</option>
+                                    <option>Business Partnership</option>
+                                    <option>Export Information</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-2 block">Message</label>
+                                <textarea rows="4" placeholder="Write your message..." class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100 transition-all resize-none" required></textarea>
+                            </div>
+                            <button type="submit" class="w-full btn-primary py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2">
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-10">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-400 to-brand-500 flex items-center justify-center">
+                            <span class="text-white font-display font-bold text-xl">V</span>
+                        </div>
+                        <div>
+                            <span class="font-display font-bold text-lg text-white tracking-tight">VOLOSH</span>
+                            <span class="block text-[10px] text-white/40 uppercase tracking-widest -mt-1">Sport Footwear</span>
+                        </div>
+                    </div>
+                    <p class="text-white/40 text-sm leading-relaxed max-w-sm mb-4">
+                        Premium Leather Sports Footwear from Indonesia. Move Better. Perform Better.
+                    </p>
+                    <div class="flex items-center gap-3 text-sm text-white/40">
+                        <span>World's #1 Exporter HS Code 640319</span>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Navigation</h4>
+                    <div class="space-y-2">
+                        <a href="#about" class="block text-white/40 text-sm hover:text-gold-300 transition-colors">About</a>
+                        <a href="#products" class="block text-white/40 text-sm hover:text-gold-300 transition-colors">Products</a>
+                        <a href="#features" class="block text-white/40 text-sm hover:text-gold-300 transition-colors">Advantages</a>
+                        <a href="#global" class="block text-white/40 text-sm hover:text-gold-300 transition-colors">Global</a>
+                        <a href="#shipping" class="block text-white/40 text-sm hover:text-gold-300 transition-colors">Shipping</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Contact</h4>
+                    <div class="space-y-2">
+                        <p class="text-white/40 text-sm">Jakarta, Indonesia</p>
+                        <a href="tel:+6285727027643" class="block text-white/40 text-sm hover:text-gold-300 transition-colors">+62 857 2702 7643</a>
+                        <a href="mailto:voloshsport.id@gmail.com" class="block text-white/40 text-sm hover:text-gold-300 transition-colors">voloshsport.id@gmail.com</a>
+                        <a href="https://instagram.com/voloshsport" target="_blank" class="block text-white/40 text-sm hover:text-gold-300 transition-colors">@voloshsport</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-white/30 text-xs">© 2025 Volosh Sport Footwear. All rights reserved.</p>
+                <p class="text-white/30 text-xs">Made with ❤️ in Indonesia</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const products = [
+            {
+                id: 1,
+                name: "Volosh Shaga",
+                price: 98,
+                image: "https://z-cdn-media.chatglm.cn/files/ace1e2d3-9d16-4fb2-80d6-746824327c07.png?auth_key=1880753528-fce9eb0f66094136bd393bbf88848abc-0-4984ebf8f00eed2087f57af81389d9af",
+                material: "Engineering mesh with synthetic leather overlay",
+                desc: "A combination of engineering mesh with synthetic leather overlay providing optimal comfort and ventilation.",
+                sizes: [39, 40, 41, 42, 43, 44]
+            },
+            {
+                id: 2,
+                name: "Volosh Xacto",
+                price: 100,
+                image: "https://z-cdn-media.chatglm.cn/files/fc18f4bf-5d75-40d9-be74-4367840b3a03.png?auth_key=1880753528-4c90288ec96f40f6a12f6e4f830d0b32-0-cabe7faf826f2105c640e050c6938505",
+                material: "PU Leather and mesh",
+                desc: "A blend of PU Leather and mesh creating a lightweight yet stylish and durable shoe.",
+                sizes: [39, 40, 41, 42, 43, 44]
+            },
+            {
+                id: 3,
+                name: "Volosh SCR-002",
+                price: 90,
+                image: "https://z-cdn-media.chatglm.cn/files/ebb0aa2c-ecbc-420a-beff-99784b30d079.png?auth_key=1880753528-34fee31782124788b36c531043717bed-0-8aa85b3e9e79ec75962ea544426e6ee3",
+                material: "White PU Leather or microfiber leather",
+                desc: "Using white PU Leather or microfiber leather for a clean and elegant look all day long.",
+                sizes: [39, 40, 41, 42, 43, 44]
+            },
+            {
+                id: 4,
+                name: "Volosh Attract II Black Out",
+                price: 85,
+                image: "https://z-cdn-media.chatglm.cn/files/7c234f16-b5b5-4d99-b799-ea627898d3bb.png?auth_key=1880753528-7ebb144e23234af4b624cb8f61d8a757-0-24ea9dcf912fad4370449230bc85235f",
+                material: "Microfiber leather or premium PU",
+                desc: "Using microfiber leather or premium PU with elegant and bold matte finishing.",
+                sizes: [39, 40, 41, 42, 43, 44]
+            },
+            {
+                id: 5,
+                name: "Volosh Attract Casual Black Brown",
+                price: 92,
+                image: "https://z-cdn-media.chatglm.cn/files/fe84890e-ebc5-4f63-9c3b-951346fec5a7.png?auth_key=1880753528-ddbe6b031fa049a58432970b0c96d80d-0-4613a9b2d52eb7afa3d0e85478358ea1",
+                material: "Synthetic leather (PU Leather) with matte finishing",
+                desc: "Synthetic leather (PU Leather) with sophisticated black-brown matte finishing for a casual style.",
+                sizes: [39, 40, 41, 42, 43, 44]
+            },
+            {
+                id: 6,
+                name: "Volosh Attract Casual White Red",
+                price: 95,
+                image: "https://z-cdn-media.chatglm.cn/files/23b10991-3095-48b7-b702-44b2e0a8b02d.png?auth_key=1880753528-2d3a01c6653845c982169844463ca17d-0-5a0c8ba5980aaf664657b9142a3c4916",
+                material: "White PU Leather with coating layer",
+                desc: "White PU Leather with coating layer and sporty red accents, perfect for a dynamic look.",
+                sizes: [39, 40, 41, 42, 43, 44]
+            }
+        ];
+
+        let cart = [];
+
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = products.map((p, i) => `
+                <div class="product-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm reveal delay-${i * 100}">
+                    <div class="relative bg-gradient-to-br from-brand-50 to-gray-50 p-4 cursor-pointer" onclick="openProductModal(${p.id})">
+                        <img src="${p.image}" alt="${p.name}" class="w-full aspect-square object-contain product-img rounded-lg">
+                        <span class="absolute top-3 left-3 badge-preorder text-[10px] font-bold px-3 py-1 rounded-full">PRE-ORDER</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display font-bold text-brand-500 mb-1">${p.name}</h3>
+                        <p class="text-xs text-gray-400 mb-3 line-clamp-2">${p.desc}</p>
+                        <div class="flex items-center justify-between">
+                            <span class="font-display font-bold text-gold-600 text-xl">$${p.price}</span>
+                            <button onclick="addToCart(${p.id})" class="btn-primary px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5">
+                                <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+            initScrollReveal();
+        }
+
+        function openProductModal(id) {
+            const p = products.find(x => x.id === id);
+            if (!p) return;
+            document.getElementById('modal-img').src = p.image;
+            document.getElementById('modal-img').alt = p.name;
+            document.getElementById('modal-name').textContent = p.name;
+            document.getElementById('modal-desc').textContent = p.desc;
+            document.getElementById('modal-material').textContent = p.material;
+            document.getElementById('modal-price').textContent = `$${p.price}`;
+
+            const sizesEl = document.getElementById('modal-sizes');
+            sizesEl.innerHTML = p.sizes.map((s, i) => `
+                <button class="size-btn w-10 h-10 rounded-lg border border-gray-200 text-sm font-medium text-gray-600 ${i === 2 ? 'active' : ''}" onclick="selectSize(this)">${s}</button>
+            `).join('');
+
+            document.getElementById('modal-add-btn').onclick = () => {
+                addToCart(p.id);
+                closeProductModal();
+            };
+
+            document.getElementById('product-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('product-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeProductModal();
+        });
+
+        function selectSize(btn) {
+            btn.parentElement.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function addToCart(id) {
+            const p = products.find(x => x.id === id);
+            if (!p) return;
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ ...p, qty: 1 });
+            }
+            updateCartUI();
+            showToast(`${p.name} added to cart!`);
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+
+        function updateQty(id, delta) {
+            const item = cart.find(x => x.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                removeFromCart(id);
+                return;
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const countEl = document.getElementById('cart-count');
+            const listEl = document.getElementById('cart-list');
+            const emptyEl = document.getElementById('cart-empty');
+            const footerEl = document.getElementById('cart-footer');
+            const subtotalEl = document.getElementById('cart-subtotal');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            if (totalItems > 0) {
+                countEl.textContent = totalItems;
+                countEl.classList.remove('hidden');
+                emptyEl.classList.add('hidden');
+                listEl.classList.remove('hidden');
+                footerEl.classList.remove('hidden');
+            } else {
+                countEl.classList.add('hidden');
+                emptyEl.classList.remove('hidden');
+                listEl.classList.add('hidden');
+                footerEl.classList.add('hidden');
+            }
+
+            subtotalEl.textContent = `$${subtotal}`;
+
+            listEl.innerHTML = cart.map(item => `
+                <div class="flex gap-4 bg-gray-50 rounded-xl p-3">
+                    <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-contain rounded-lg bg-white">
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-semibold text-brand-500 text-sm truncate">${item.name}</h4>
+                        <p class="text-gold-600 font-bold text-sm mt-1">$${item.price}</p>
+                        <div class="flex items-center gap-2 mt-2">
+                            <button onclick="updateQty(${item.id}, -1)" class="w-7 h-7 rounded-md bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors text-xs font-bold">−</button>
+                            <span class="text-sm font-semibold text-brand-500 w-6 text-center">${item.qty}</span>
+                            <button onclick="updateQty(${item.id}, 1)" class="w-7 h-7 rounded-md bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors text-xs font-bold">+</button>
+                            <button onclick="removeFromCart(${item.id})" class="ml-auto p-1 hover:text-red-500 text-gray-400 transition-colors">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        function toggleCart() {
+            const overlay = document.getElementById('cart-overlay');
+            const sidebar = document.getElementById('cart-sidebar');
+            const isOpen = !sidebar.classList.contains('translate-x-full');
+
+            if (isOpen) {
+                sidebar.classList.add('translate-x-full');
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            } else {
+                sidebar.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function checkout() {
+            if (cart.length === 0) return;
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const itemCount = cart.reduce((sum, item) => sum + item.qty, 0);
+
+            let msg = `Hello Volosh Sport Footwear! 👋\n\nI'm interested in placing a pre-order:\n`;
+            cart.forEach(item => {
+                msg += `\n• ${item.name} (x${item.qty}) - $${item.price * item.qty}`;
+            });
+            msg += `\n\nTotal: $${total} (${itemCount} item${itemCount > 1 ? 's' : ''})`;
+            msg += `\nPlease provide more information about this pre-order. Thank you!`;
+
+            const waUrl = `https://wa.me/6285727027643?text=${encodeURIComponent(msg)}`;
+            window.open(waUrl, '_blank');
+
+            showToast('Redirecting to WhatsApp for checkout...');
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast bg-white rounded-xl px-5 py-3 shadow-lg border border-gray-100 flex items-center gap-3 max-w-sm';
+            toast.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="check" class="w-4 h-4 text-green-600"></i>
+                </div>
+                <span class="text-sm text-gray-700">${message}</span>
+            `;
+            container.appendChild(toast);
+            lucide.createIcons();
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+        function closeMobileMenu() {
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        function initScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            reveals.forEach(el => observer.observe(el));
+        }
+
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showToast('Message sent successfully! We will get back to you shortly.');
+            this.reset();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            lucide.createIcons();
+            initScrollReveal();
+        });
+    </script>
+</body>
+</html>
